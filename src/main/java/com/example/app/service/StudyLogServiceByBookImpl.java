@@ -63,8 +63,7 @@ public class StudyLogServiceByBookImpl implements StudyLogService {
 
     @Override
     public StudyLogsList showStudyLog(Integer userId) throws Exception {
-    	Integer status = 0;
-        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBook(userId, status);
+        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBook(userId);
         StudyLogsList studyList = new StudyLogsList();
         studyList.setStudyLogs(studyListParam);
         return studyList;
@@ -72,24 +71,21 @@ public class StudyLogServiceByBookImpl implements StudyLogService {
 
     @Override
     public StudyLogsList showStudyLogByDays(Integer userId, Integer days) throws Exception {
-    	Integer status = 0;
-        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBookDays(userId, days, status);
+        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBookDays(userId, days);
         StudyLogsList studyList = new StudyLogsList();
         studyList.setStudyLogs(studyListParam);
         return studyList;
     }
     
     public StudyLogsList showStudyLogByBookDone(Integer userId) throws Exception {
-    	Integer status =1;
-        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBook(userId, status);
+        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBookDone(userId);
         StudyLogsList studyList = new StudyLogsList();
         studyList.setStudyLogs(studyListParam);
         return studyList;
     }
     
     public StudyLogsList showStudyLogByBookDoneDays(Integer userId, Integer days) throws Exception{
-    	Integer status = 1;
-        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBookDays(userId, days, status);
+        List<StudyLog> studyListParam = studyLogMapper.getStudyLogByBookDoneDays(userId, days);
         StudyLogsList studyList = new StudyLogsList();
         studyList.setStudyLogs(studyListParam);
         return studyList;

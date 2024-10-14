@@ -1,0 +1,150 @@
+/* サイドバーメニュー */
+.side-container,
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label,
+form input[type="submit"],
+#openSidebar,
+#update {
+    background-color: rgb(128, 0, 0);
+    color: white;
+    border-radius: 12px;
+    padding: 3px 5px 3px 5px;
+    margin-top: 50px;
+}
+
+form label {
+    margin-bottom: 15px;
+    margin-top: 8px;
+    margin-bottom: 3px;
+}
+
+form input[type="submit"],
+#update {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.side-bar {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    transition: left 0.5s ease;
+}
+
+#openSidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.5s ease;
+    border-radius: 30%;
+}
+
+#openSidebar:hover,
+#listField:hover {
+    background-color: darkred;
+    color: white;
+    border-radius: 15%;
+}
+
+/* 表 */
+.container {
+    display: table; /* テーブルのレイアウトを維持 */
+    width: 100%;
+    margin-top: 50px;
+}
+#listField {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.5s ease;
+    border-radius: 30%;
+    background-color: white;
+    transform: translateX(-50%);
+}
+
+table {
+    caption-side: bottom;
+    border-collapse: collapse; /* セルの境界を正しく表示 */
+}
+
+.comment-box {
+    display: block;
+    width: 100%;
+    background-color: rgb(244, 230, 219);
+    text-align: center;
+}
+
+.container tr:nth-child(even) {
+    background-color: rgb(244, 230, 219);
+    /* 淡色 */
+}
+
+.container td,
+.container th {
+    text-align: center;
+}
+
+.container tr th {
+    background-color: rgb(244, 230, 219);
+}
+
+.container td:nth-child(5) {
+    text-align: right;
+}
+
+.time-box {
+    width: 50px;
+    text-align: right;
+}
+
+.comment-box {
+    width: 100%;
+    border: none;
+    display: block;
+    width: 100%;
+    background-color: rgb(244, 230, 219);
+    text-align: center;
+    white-space: pre-wrap; /* スペースや改行をそのまま表示 */
+}
+
+
+a {
+    color: brown;
+}
+
+a:hover {
+    color: darkred;
+}
+.genre-name:hover, .book-name:hover, .bookDone-name:hover {
+    opacity: 0.6;
+}

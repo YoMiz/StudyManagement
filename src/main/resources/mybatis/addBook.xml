@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.AddBookMapper">
+	<insert id="createGenreId" parameterType="string">
+		INSERT INTO genre (genre_name)
+		SELECT #{genreName} WHERE NOT EXISTS (
+		SELECT 1 FROM genre WHERE
+		genre_name = #{genreName}
+		);
+	</insert>
+	<select id="selectGenreId" resultType="int">
+		SELECT genre_id FROM genre
+		WHERE genre_name = #{genreName}
+	</select>
+	<insert id="createBook" parameterType="com.example.app.domain.Book" 
+		keyProperty="bookId" useGeneratedKeys="true">
+		INSERT INTO book(book_name, author, genre_id, status)
+		VALUES(#{bookName}, #{author}, #{genreId}, #{status})
+	</insert>
+	<insert id="createStudyLog" parameterType="com.example.app.domain.Book">
+		INSERT INTO study_log(date, user_id, time, book_id)
+		VALUES(#{date}, #{userId}, #{time}, #{bookId})
+	</insert>
+</mapper>

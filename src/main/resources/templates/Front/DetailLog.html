@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Genre Log</title>
+</head>
+
+<body>
+	<main>
+		<p th:text="${detailType} + ' Log'"></p>
+		<p th:text="'ID: ' + ${id}"></p>
+		<div  style="text-align:center">
+		<a href="/main">戻る</a>			
+		</div>
+	</main>
+</body>
+
+</html>

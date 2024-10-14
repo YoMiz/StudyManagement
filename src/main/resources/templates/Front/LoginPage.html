@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>StudyManager Login</title>
+</head>
+
+<body>
+	<div class="login-container">
+		<form action="/loginCheck" method="post" th:object="${user}">
+			<label for="username">UserName</label><br />
+			<input type="text" id="username" th:field="*{userName}" oninput="checkInput()" /><br />
+			<label for="password">Password</label><br />
+			<input type="password" id="password" th:field="*{userPassword}" oninput="checkInput()" />
+			<br />
+			<input type="submit" id="submit" value="submit" />
+		</form>
+	</div>
+	<script>
+		function checkInput() {
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			if (username !== "" && password !== "") {
+				document.getElementById('submit').style.visibility = 'visible';
+				document.getElementById('submit').style.opacity = '1';
+			} else {
+				document.getElementById('submit').style.visibility = 'hidden';
+				document.getElementById('submit').style.opacity = '0';
+			}
+		}
+	</script>
+	<script>
+    window.addEventListener('keydown',function(e){
+        if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){
+            if(e.target.nodeName=='INPUT'&&e.target.type=='text'){
+                e.preventDefault();
+                return false;
+            }
+        }
+    },true);
+</script>
+
+</body>
+
+</html>

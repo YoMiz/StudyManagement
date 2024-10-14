@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>MainMenu</title>
+</head>
+
+<body>
+	<main>
+		<div class="side-bar">
+			<div class="side-container">
+				<form action="/addBook" method="post" th:object="${book}">
+					<label for="bookName">Title</label><br />
+					<input type="text" id="bookName" th:field="*{bookName}" oninput="checkInput1()" /><br />
+					<label for="author">Author</label><br />
+					<input type="text" id="author" th:field="*{author}" oninput="checkInput1()" /><br />
+					<label for="genreName">Genre</label><br />
+					<input type="text" id="genreName" th:field="*{genreName}" oninput="checkInput1()" /><br />
+					<input type="submit" id="addBook" value="addBook" style="visibility: hidden; opacity: 0;" /><br />
+				</form>
+			</div>
+		</div>
+		<button id="openSidebar" class="openBtn">Menu</button>
+		<div id="listField">
+			<button class="list-button" onclick="changeList('List')">ALL</button>
+			<button class="list-button" onclick="changeList('Weekly')">Weekly</button>
+			<button class="list-button" onclick="changeList('Monthly')">Monthly</button>
+		</div>
+
+		<p style="padding-top:100px;">Welcome Back</p>
+		<p th:text="${session.userName}"></p>
+		<p style="font-weight:bold; text-decoration:underline;">Genre</p>
+		<table class="container">
+			<tr>
+				<th>Genre</th>
+				<th>Time</th>
+				<th>Date</th>
+			</tr>
+			<tbody id="tableBodyGenre">
+				<!-- <th:block th:each="studyLog : *{studyLogs}">
+					<tr>
+						<td th:text="${studyLog.genreName}"></td>
+						<td th:text="${#dates.format(studyLog.lastDate,'yy/MM/dd')}"></td>
+						<td th:text="${studyLog.sumOfTime}"></td>
+					</tr>
+					<tr>
+						<td colspan="3" style="display: table-cell; width: 100%; background-color:rgb(244, 230, 219);">
+							<span class="comment-box"
+								th:utext="${#strings.isEmpty(studyLog.comment) ? '&nbsp' : studyLog.comment}"></span>
+						</td>
+					</tr>
+				</th:block> -->
+			</tbody>
+		</table>
+		<canvas id="genreChart" style="max-width: 300px; max-height: 200px; margin-top:50px;"></canvas>
+		<form action="/updateStudyLogs" method="post" id="myForm" th:object="${studyLogByBookList}">
+			<table class="container">
+				<p style="padding-top: 30px; font-weight:bold; text-decoration:underline;">Reading</p>
+				<tr>
+					<th>Book</th>
+					<th>Genre</th>
+					<th>Author</th>
+					<th>Time</th>
+					<th>Date</th>
+					<th>StudyTime</th>
+					<th>DoneReading</th>
+				</tr>
+				<tbody id="tableBodyBook">
+					<!-- <th:block th:each="studyLog, i: *{studyLogs}">
+						<tr>
+							<td hidden><input type="text" id="listField" th:value="${studyLog.bookId}"
+									th:field="*{studyLogs[__${i.index}__].bookId}" /></td>
+							<td><span th:text="${studyLog.bookName}"></span></td>
+							<td><span th:text="${studyLog.genreName}"></span></td>
+							<td th:text="${studyLog.author}"></td>
+							<td th:text="${studyLog.sumOfTime}"></td>
+							<td th:text="${#dates.format(studyLog.lastDate, 'yy/MM/dd')}"></td>
+							<td><input type="number" class="time-box" th:data-book-id="${studyLog.bookId}" step="0.5"
+									min="0" th:value="${studyLog.time}" th:field="*{studyLogs[__${i.index}__].time}"
+									placeholder="0.0" /></td>
+							<td hidden><input type="checkbox" th:id="'check' + ${studyLog.bookId}" th:value="1"
+									th:field="*{studyLogs[__${i.index}__].updateCheck}" /></td>
+							<td><input type="checkbox" th:id="'Done' + ${studyLog.bookId}" th:value="1"
+									th:field="*{studyLogs[__${i.index}__].status}" /></td>
+						</tr>
+						<tr>
+							<td colspan="7"><input type="text" class="comment-box"
+									th:field="*{studyLogs[__${i.index}__].comment}"
+									th:attr="placeholder=*{studyLogs[__${i.index}__].comment}" />
+						</tr>
+					</th:block> -->
+				</tbody>
+			</table>
+			<input type="submit" id="update" value="ログ更新">
+		</form>
+		<canvas id="bookChart" style="max-width: 300px; max-height: 200px; margin-top:50px;"></canvas>
+		<table class="container">
+			<p style="padding-top: 30px; font-weight:bold; text-decoration:underline;">Been Read</p>
+			<tr>
+				<th>Book</th>
+				<th>Genre</th>
+				<th>Author</th>
+				<th>Total Time</th>
+				<th>Date</th>
+			</tr>
+			<tbody id="tableBodyBookDone">
+				<!--<th:block th:each="studyLog : ${studyLogByBookDoneList.studyLogs}">
+					<tr>
+						<td th:text="${studyLog.genreName}"></td>
+						<td th:text="${studyLog.bookName}"></td>
+						<td th:text="${studyLog.author}"></td>
+						<td th:text="${studyLog.sumOfTime}"></td>
+						<td th:text="${#dates.format(studyLog.lastDate,'yy年MM月dd日')}"></td>
+					</tr>
+					<tr>
+						<td colspan="5" th:text="${studyLog.comment}" />
+						</td>
+					</tr>
+				</tbody>
+			</th:block>-->
+		</table>
+		<canvas id="bookDoneChart" style="max-width: 300px; max-height: 200px; margin-top:50px;"></canvas>
+	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script th:src="@{/JS/main/sidebar.js}"></script>
+	<script th:src="@{/JS/main/checkInput.js}"></script>
+	<script th:src="@{/JS/main/updateCheckBox.js}"></script>
+	<script th:src="@{/JS/main/genre.js}"></script>
+	<script th:src="@{/JS/main/book.js}"></script>
+	<script th:src="@{/JS/main/bookDone.js}"></script>
+	<script th:src="@{/JS/main/chart.js}"></script>
+	<script th:src="@{/JS/main/clickHandler.js}"></script>
+	
+	<script>function changeList(listName) {
+    fetchAndRenderGenreData(listName);
+    fetchAndRenderBookData(listName);
+    fetchAndRenderBookDoneData(listName);
+}
+</script>
+
+
+</body>
+
+
+</html>

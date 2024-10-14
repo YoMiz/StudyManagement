@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.StudyLogByGenreMapper">
+	<select id="getStudyLogByGenre"
+		resultType="com.example.app.domain.StudyLog">
+		WITH latest_comments AS (
+		SELECT b.genre_id, b.book_id, MAX(s.date) as max_date
+		FROM study_log s
+		JOIN book b ON s.book_id = b.book_id
+		WHERE s.user_id = #{userId}
+		GROUP BY b.genre_id, b.book_id
+		),
+		time_sum AS (
+		SELECT b.genre_id, CAST(SUM(s.time) AS DECIMAL(65, 1)) as sum_of_time
+		FROM study_log s
+		JOIN book b ON s.book_id = b.book_id
+		WHERE s.user_id = #{userId}
+		GROUP BY b.genre_id
+		)
+		SELECT g.genre_name, g.genre_id, ts.sum_of_time,
+		MAX(sl.comment) as comment, MAX(lc.max_date) as last_date
+		FROM genre g
+		JOIN book b ON g.genre_id = b.genre_id
+		JOIN time_sum ts ON g.genre_id = ts.genre_id
+		JOIN latest_comments lc ON b.genre_id = lc.genre_id
+		JOIN study_log sl ON lc.book_id = sl.book_id AND lc.max_date = sl.date
+		GROUP BY g.genre_name, g.genre_id, ts.sum_of_time
+		ORDER BY last_date DESC;
+	</select>
+	<select id="getStudyLogByGenreDays"
+		resultType="com.example.app.domain.StudyLog">
+		WITH latest_comments AS (
+		SELECT book_id, MAX(date) as
+		last_date
+		FROM study_log
+		WHERE user_id = #{userId} AND date >=
+		DATE_SUB(CURDATE(), INTERVAL #{days}
+		DAY)
+		GROUP BY book_id
+		),
+		time_sum AS
+		(
+		SELECT book_id, CAST(SUM(time) AS DECIMAL(65, 1)) as sum_of_time
+		FROM
+		study_log
+		WHERE user_id = #{userId} AND date >= DATE_SUB(CURDATE(),
+		INTERVAL #{days}
+		DAY)
+		GROUP BY book_id
+		)
+		SELECT g.genre_id, g.genre_name,
+		SUM(ts.sum_of_time) as sum_of_time,
+		MAX(lc.last_date) as last_date,
+		GROUP_CONCAT((SELECT comment FROM study_log WHERE book_id = b.book_id
+		AND date =
+		lc.last_date) ORDER BY lc.last_date DESC SEPARATOR '; ') as
+		comment
+		FROM genre g
+		JOIN book b ON g.genre_id = b.genre_id
+		JOIN time_sum
+		ts ON b.book_id = ts.book_id
+		JOIN latest_comments lc ON b.book_id =
+		lc.book_id
+		GROUP BY g.genre_id
+		ORDER BY last_date DESC;
+	</select>
+	<select id="getAllStudyLogOfAGenre">
+		SELECT b.book_name, g.genre_name, b.author,
+		CAST(s.time AS DECIMAL(65, 1)) as time, s.date
+		FROM study_log s
+		JOIN
+		book b ON s.book_id = b.book_id
+		JOIN genre g ON b.genre_id = g.genre_id
+		WHERE s.user_id = #{userId} AND b.genre_id = #{genreId}
+		GROUP BY
+		b.book_name, g.genre_name, b.author, s.date, s.time
+		ORDER BY s.date;
+	</select>
+
+</mapper>

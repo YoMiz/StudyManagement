@@ -1,4 +1,4 @@
-package com.example.app.controller;
+package com.example.app.controller.detail;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class DetailLogController {
+public class DetailPageController {
 
 	@PostMapping("/genreDetailLog")
 	public String genreDetailStudyLog(@RequestParam("genreId") Integer genreId, Model model) throws Exception {

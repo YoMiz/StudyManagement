@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.app.domain.StudyLog;
 @Mapper
 public interface StudyLogByBookMapper {
-    List<StudyLog> getStudyLogByBook(Integer userId) throws Exception;
-    List<StudyLog> getStudyLogByBookDays(Integer userId, Integer days) throws Exception;
-    List<StudyLog> getStudyLogByBookDone(Integer userId) throws Exception;
-    List<StudyLog> getStudyLogByBookDoneDays(Integer userId, Integer days) throws Exception;
+    List<StudyLog> getStudyLogByBook(Integer userId, Integer status) throws Exception;
+    List<StudyLog> getStudyLogByBookDays(Integer userId, Integer days, Integer status) throws Exception;
     void updateBookStatus(StudyLog studyLog);
     void insertStudyLog(StudyLog studyLog);
 }

@@ -17,7 +17,7 @@
 		JOIN
 		genre g ON b.genre_id = g.genre_id
 		WHERE
-		g.genre_id = 3 AND sl.user_id = 1
+		g.genre_id = #{genreId} AND sl.user_id = #{userId}
 		ORDER BY
 		sl.date;
 	</select>
@@ -37,9 +37,9 @@
 		JOIN
 		genre g ON b.genre_id = g.genre_id
 		WHERE
-		g.genre_id = 3
-		AND sl.user_id = 1
-		AND sl.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+		g.genre_id = #{genreId}
+		AND sl.user_id = #{userId}
+		AND sl.date >= DATE_SUB(CURDATE(), INTERVAL #{days})
 		ORDER BY
 		sl.date;
 	</select>

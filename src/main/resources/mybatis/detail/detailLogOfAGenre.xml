@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.detail.detailLogOfAGenreMapper">
+	<select id="getStudyLogOfAGenre">SELECT
+		sl.date,
+		sl.time,
+		b.book_name,
+		SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT
+		ROW) AS sum_of_time,
+		sl.comment,
+		g.genre_name
+		FROM
+		study_log sl
+		JOIN
+		book b ON sl.book_id = b.book_id
+		JOIN
+		genre g ON b.genre_id = g.genre_id
+		WHERE
+		g.genre_id = 3 AND sl.user_id = 1
+		ORDER BY
+		sl.date;
+	</select>
+	<select id="getStudyLogOfAGenreDays">
+		SELECT
+		sl.date,
+		sl.time,
+		b.book_name,
+		SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT
+		ROW) AS sum_of_time,
+		sl.comment,
+		g.genre_name
+		FROM
+		study_log sl
+		JOIN
+		book b ON sl.book_id = b.book_id
+		JOIN
+		genre g ON b.genre_id = g.genre_id
+		WHERE
+		g.genre_id = 3
+		AND sl.user_id = 1
+		AND sl.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+		ORDER BY
+		sl.date;
+	</select>
+	</mapper>

@@ -1,4 +1,4 @@
-package com.example.app.service;
+package com.example.app.service.user;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;

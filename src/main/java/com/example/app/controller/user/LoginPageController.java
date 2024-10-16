@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.app.domain.User;
-import com.example.app.service.UserService;
+import com.example.app.service.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
-import com.example.app.service.StudyLogServiceByBookImpl;
-import com.example.app.service.StudyLogServiceByGenreImpl;
+import com.example.app.service.main.StudyLogServiceByBookImpl;
+import com.example.app.service.main.StudyLogServiceByGenreImpl;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.app.domain.StudyLog;
 import com.example.app.domain.StudyLogsList;
-import com.example.app.mapper.StudyLogByGenreMapper;
+import com.example.app.mapper.main.StudyLogByGenreMapper;
 
 import lombok.RequiredArgsConstructor;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.app.domain.Book;
 import com.example.app.domain.User;
-import com.example.app.mapper.AddBookMapper;
+import com.example.app.mapper.main.AddBookMapper;
 
 import lombok.RequiredArgsConstructor;
 

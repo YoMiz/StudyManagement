@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.app.domain.Book;
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
-import com.example.app.service.AddBookService;
-import com.example.app.service.StudyLogServiceByBookImpl;
+import com.example.app.service.main.AddBookService;
+import com.example.app.service.main.StudyLogServiceByBookImpl;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

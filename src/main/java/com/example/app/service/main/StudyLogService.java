@@ -1,4 +1,4 @@
-package com.example.app.service;
+package com.example.app.service.main;
 
 import com.example.app.domain.StudyLogsList;
 

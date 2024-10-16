@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.app.domain.StudyLog;
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
-import com.example.app.mapper.StudyLogByBookMapper;
+import com.example.app.mapper.main.StudyLogByBookMapper;
 
 import lombok.RequiredArgsConstructor;
 

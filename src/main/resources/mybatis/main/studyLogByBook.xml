@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.app.mapper.StudyLogByBookMapper">
+<mapper namespace="com.example.app.mapper.main.StudyLogByBookMapper">
 	<select id="getStudyLogByBook"
 		resultType="com.example.app.domain.StudyLog">
 		SELECT sl1.date, sl1.user_id, sl1.book_id,

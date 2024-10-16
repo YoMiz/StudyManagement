@@ -4,7 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.example.app.domain.User;
-import com.example.app.mapper.UserMapper;
+import com.example.app.mapper.user.UserMapper;
 
 import lombok.RequiredArgsConstructor;
 

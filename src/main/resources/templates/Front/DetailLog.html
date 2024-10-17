@@ -8,15 +8,28 @@
 
 <body>
 	<main>
+		<div id="listField">
+			<button class="list-button" onclick="changeList('List')">ALL</button>
+			<button class="list-button" onclick="changeList('Weekly')">Weekly</button>
+			<button class="list-button" onclick="changeList('Monthly')">Monthly</button>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
 		<p th:text="${detailType} + ' Log'"></p>
 		<p th:text="'ID: ' + ${id}"></p>
-		<div  style="text-align:center">
-		<a href="/main">戻る</a>			
+		<div style="text-align:center">
+			<a href="/main">戻る</a>
 		</div>
 		<canvas id="detailChart" style="max-width: 300px; max-height:200px; margin-top:50px;"></canvas>
-		<tbody id="detailTable">	
+		<tbody id="detailTable">
 		</tbody>
 	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	</script>
 </body>
 
 </html>

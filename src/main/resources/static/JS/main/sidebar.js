@@ -31,7 +31,4 @@ $(document).ready(function () {
         updateCheckBox(this, 'check' + this.id.replace('Done', ''), true);
         showUpdateButton();
     });
-    fetchAndRenderGenreData('List');
-    fetchAndRenderBookData('List');
-    fetchAndRenderBookDoneData('List');
 });

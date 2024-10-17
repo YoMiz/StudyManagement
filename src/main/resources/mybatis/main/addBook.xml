@@ -19,7 +19,7 @@
 		VALUES(#{bookName}, #{author}, #{genreId}, #{status})
 	</insert>
 	<insert id="createStudyLog" parameterType="com.example.app.domain.Book">
-		INSERT INTO study_log(date, user_id, time, book_id)
-		VALUES(#{date}, #{userId}, #{time}, #{bookId})
+		INSERT INTO study_log(date, user_id, time, book_id, comment)
+		VALUES(#{date}, #{userId}, #{time}, #{bookId}, #{comment})
 	</insert>
 </mapper>

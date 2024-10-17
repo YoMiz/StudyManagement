@@ -36,6 +36,7 @@ public class AddBookServiceImpl implements AddBookService {
 	        book.setDate(Timestamp.valueOf(today));
 	        book.setTime(time);
 	        book.setStatus(status); 
+	        book.setComment("登録");
 	    addBookMapper.createBook(book); 
 	    addBookMapper.createStudyLog(book);
 	}

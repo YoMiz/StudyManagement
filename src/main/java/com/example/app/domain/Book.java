@@ -19,4 +19,5 @@ public class Book {
 	Date date;
 	Double time;
 	Integer status;
+	String comment;
 }

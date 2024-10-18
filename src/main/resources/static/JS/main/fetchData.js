@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    fetchAndRenderGenreData('List');
-    fetchAndRenderBookData('List');
-    fetchAndRenderBookDoneData('List');
+    fetchGenreData('List');
+    fetchBookData('List');
+    fetchBookDoneData('List');
 });
 
 function changeList(listName) {
-    fetchAndRenderGenreData(listName);
-    fetchAndRenderBookData(listName);
-    fetchAndRenderBookDoneData(listName);
+    fetchGenreData(listName);
+    fetchBookData(listName);
+    fetchBookDoneData(listName);
 }

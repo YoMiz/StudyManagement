@@ -1,4 +1,4 @@
-function fetchAndRenderGenreData(listName) {
+function fetchGenreData(listName) {
     $.ajax({
         url: "/getStudyLogByGenre" + listName.charAt(0).toUpperCase() + listName.slice(1),
         type: "GET",

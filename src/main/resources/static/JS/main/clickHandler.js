@@ -19,7 +19,6 @@ function attachGenreClickHandlers() {
 	window.onpopstate = function(event) {
 		if (event.state && event.state.genreId) {
 			var genreId = event.state.genreId;
-			console.log("genreId:", genreId);
 			$.ajax({
 				url: "/genreDetailLog",
 				type: "POST",
@@ -40,14 +39,14 @@ function attachGenreClickHandlers() {
 	$('.book-name, .bookDone-name').on('click', function() {
 		var bookId = $(this).data('book-id');
 		$.ajax({
-			url: "/bookDetailLog", // 共通のURLに遷移
+			url: "/bookDetailLog", 
 			type: "POST",
 			data: { bookId: bookId },
 			success: function(response) {
 				$('main').html(response);
 				history.pushState({ bookId: bookId }, '', 'bookDetailLog');
 			},
-			error: function(xhr, status, error) {
+			error: function(error) {
 				console.error("Error occurred: " + error);
 			}
 		});
@@ -56,15 +55,14 @@ function attachGenreClickHandlers() {
 	window.onpopstate = function(event) {
 		if (event.state && event.state.bookId) {
 			var bookId = event.state.bookId;
-			console.log("bookId", bookId);
 			$.ajax({
-				url: "/bookDetailLog", // 共通のURLに遷移
+				url: "/bookDetailLog", 
 				type: "POST",
 				data: { bookId: bookId },
 				success: function(response) {
 					$('main').html(response);
 				},
-				error: function(xhr, status, error) {
+				error: function(error) {
 					console.error("Error occurred: " + error);
 				}
 			});

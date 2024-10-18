@@ -9,7 +9,7 @@ function fetchGenreDetailData(listName, dataId) {
 			console.log(dataId);
 			console.log(data);
 		},
-		error: function(xhr, status, error) {
+		error: function(error) {
 			console.error("Error occurred:" + error);
 		}
 	});
@@ -25,7 +25,7 @@ function fetchBookDetailData(listName, dataId) {
 			console.log(dataId);
 			console.log(data);
 		},
-		error: function(xhr, status, error) {
+		error: function(error) {
 			console.error("Error occurred:" + error);
 		}
 	});

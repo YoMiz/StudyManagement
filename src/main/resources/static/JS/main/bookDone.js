@@ -1,4 +1,4 @@
-function fetchAndRenderBookDoneData(listName) {
+function fetchBookDoneData(listName) {
 	$.ajax({
 		url: "/getStudyLogByBookDone" + listName.charAt(0).toUpperCase() + listName.slice(1),
 		type: "GET",

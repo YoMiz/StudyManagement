@@ -3,11 +3,9 @@ function fetchGenreDetailData(listName, dataId) {
 		url: "/getGenreDetailData" + listName.slice(0),
 		type: "GET",
 		success: function(data) {
-			//			renderDetailTable(data.studyLogs);
-			//			var{ labels, times } = getGenreLabelsAndTimes(data.studyLogs);
-			//			renderDetailChart(labels, times);
-			console.log(dataId);
-			console.log(data);
+			renderDetailTableGenre(data.studyLogs);
+			var { labels, times } = getGenreLabelsAndTimes(data.studyLogs);
+			renderDetailChart(labels, times);
 		},
 		error: function(error) {
 			console.error("Error occurred:" + error);
@@ -30,10 +28,18 @@ function fetchBookDetailData(listName, dataId) {
 		}
 	});
 }
-//function renderDetailTable(studyLogs){
-//	var tableBody = $('#tableBodyDetail');
-//	tableBody.empty();
-//	studyLogs.forEach(function(studyLog, i){
-//
-//	});
-//}
+function renderDetailTableGenre(studyLogs){
+	var tableBody = $('#tableBodyDetail');
+	tableBody.empty();
+	studyLogs.forEach(function(studyLog, i){
+		var bookName = studyLog.bookName;
+		var genreName = studyLog.genreName;
+		var author = studylog.author;
+		var sumOfTime = parseFloat(studyLog.sumOfTime).toFixed(1);
+		var date = studyLog.date;
+		var time = studyLog.time;
+		var comment = studyLog.comment;
+		var row = '<tr>' 
+
+	});
+}

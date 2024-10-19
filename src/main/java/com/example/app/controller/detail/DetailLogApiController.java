@@ -7,28 +7,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
-import com.example.app.service.detail.DetailServiceByGenreImpl;
+import com.example.app.service.detail.DetailLogServiceByGenreImpl;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class studyLogDetailApiController {
+public class DetailLogApiController {
 	@Autowired
-	private final DetailServiceByGenreImpl detailServiceByGenre;
+	private final DetailLogServiceByGenreImpl detailServiceByGenre;
 
 	@GetMapping("/getGenreDetailDataList")
 	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("id") Integer genreId) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
-		StudyLogsList detailLogByGenreList = detailServiceByGenre.showDetailStudyLog(userId, genreId);
-		return detailLogByGenreList;
+		StudyLogsList detailLogList = detailServiceByGenre.showDetailLog(userId, genreId);
+		return detailLogList;
 	}
 
-	@GetMapping("/getBookDetailDataList")
-	public String getBookDetailData() throws Exception {
-		String dataTypeBook = "BOOK FROM SERVER";
+	@GetMapping("/getBookDetailDataWeekly")
+	public String getGenreDetailDataDays() throws Exception {
+		String dataTypeBook = "GENRE DAYS FROM SERVER";
 		return dataTypeBook;
 	}
 }

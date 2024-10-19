@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.app.domain.StudyLog;
 @Mapper
-public interface detailLogOfAGenreMapper {
+public interface DetailLogByGenreMapper {
 	List<StudyLog> getStudyLogOfAGenre(Integer userId, Integer genreId)throws Exception;
 	List<StudyLog> getStudyLogOfAGenreDays(Integer userId, Integer genreId, Integer days)throws Exception;
 }

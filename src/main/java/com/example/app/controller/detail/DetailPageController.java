@@ -12,7 +12,7 @@ public class DetailPageController {
 	public String genreDetailStudyLog(@RequestParam("genreId") Integer genreId, Model model) throws Exception {
 		String detailType = "GENRE";
 		model.addAttribute("detailType", detailType);
-		model.addAttribute("id", genreId);
+		model.addAttribute("dataId", genreId);
 		return "Front/DetailLog";
 	}
 
@@ -20,7 +20,7 @@ public class DetailPageController {
 	public String bookDetailStudyLog(@RequestParam("bookId") Integer bookId, Model model) throws Exception {
 		String detailType = "BOOK";
 		model.addAttribute("detailType", detailType);
-		model.addAttribute("id",bookId);
+		model.addAttribute("dataId",bookId);
 		return "Front/DetailLog";
 	}
 }

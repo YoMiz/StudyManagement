@@ -19,7 +19,7 @@ public class DetailLogApiController {
 	private final DetailLogServiceByGenreImpl detailServiceByGenre;
 
 	@GetMapping("/getGenreDetailDataList")
-	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("id") Integer genreId) throws Exception {
+	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer genreId) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
 		StudyLogsList detailLogList = detailServiceByGenre.showDetailLog(userId, genreId);

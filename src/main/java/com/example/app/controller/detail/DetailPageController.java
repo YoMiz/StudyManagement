@@ -5,20 +5,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class DetailPageController {
-
+	
 	@PostMapping("/genreDetailLog")
-	public String genreDetailStudyLog(@RequestParam("genreId") Integer genreId, Model model) throws Exception {
-		String detailType = "GENRE";
-		model.addAttribute("detailType", detailType);
-		model.addAttribute("dataId", genreId);
-		return "Front/DetailLog";
+	public String genreDetailStudyLog(HttpSession session, @RequestParam("dataId") Integer dataId, Model model) throws Exception {
+		String detailType = "Genre";
+	    model.addAttribute("detailType", detailType);
+	    model.addAttribute("dataId", dataId);
+	    return "Front/DetailLog";
 	}
+
 
 	@PostMapping("/bookDetailLog")
 	public String bookDetailStudyLog(@RequestParam("bookId") Integer bookId, Model model) throws Exception {
-		String detailType = "BOOK";
+		String detailType = "Book";
 		model.addAttribute("detailType", detailType);
 		model.addAttribute("dataId",bookId);
 		return "Front/DetailLog";

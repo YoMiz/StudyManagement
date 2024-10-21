@@ -19,16 +19,27 @@ public class DetailLogApiController {
 	private final DetailLogServiceByGenreImpl detailServiceByGenre;
 
 	@GetMapping("/getGenreDetailDataList")
-	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer genreId) throws Exception {
+	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
-		StudyLogsList detailLogList = detailServiceByGenre.showDetailLog(userId, genreId);
+		StudyLogsList detailLogList = detailServiceByGenre.showDetailLog(userId, dataId);
 		return detailLogList;
 	}
 
-	@GetMapping("/getBookDetailDataWeekly")
-	public String getGenreDetailDataDays() throws Exception {
-		String dataTypeBook = "GENRE DAYS FROM SERVER";
-		return dataTypeBook;
+	@GetMapping("/getBookDetailDataWeek")
+	public StudyLogsList getGenreDetailDataWK(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 7;
+		StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
+		return detailLogList;
+	}
+	@GetMapping("/getBookDetailDataMonth")
+	public StudyLogsList getGenreDetailDataMth(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 30;
+		StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
+		return detailLogList;
 	}
 }

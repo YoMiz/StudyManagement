@@ -1,15 +1,14 @@
-
 function attachClickHandlers() {
     $('.genre-name').on('click', function() {
-        var genreId = $(this).data('genre-id');
         var dataType = $(this).data('type'); 
+        var dataId = $(this).data('id'); 
         $.ajax({
-            url: "/" + dataType + "DetailLog",
+            url: "/" + dataType + "DetailLog" ,
             type: "POST",
-            data: { genreId: genreId },
+            data: { dataId: dataId },
             success: function(response) {
                 $('main').html(response);
-                history.pushState({ genreId: genreId }, '', '/' + dataType + 'DetailLog');
+                history.pushState({ dataId: dataId }, '', '/' + dataType + 'DetailLog');
             },
             error: function(xhr, status, error) {
                 console.error("Error occurred: " + error);
@@ -18,15 +17,15 @@ function attachClickHandlers() {
     });
 
     window.onpopstate = function(event) {
-        if (event.state && event.state.genreId) {
-            var genreId = event.state.genreId;
-            var dataType = $('.genre-name[data-genre-id="' + genreId + '"]').data('type');
-            console.log("genreId (popstate):", genreId); // Debugging log
-            console.log("dataType (popstate):", dataType); // Debugging log
+        if (event.state && event.state.dataId) { 
+            var dataId = event.state.dataId; 
+            var dataType = $('.genre-name[data-id="' + dataId + '"]').data('type'); 
+            console.log(dataId);
+            console.log(dataType);
             $.ajax({
-                url: "/" + dataType + "DetailLog",
+                url: "/" + dataType + "DetailDataList",
                 type: "POST",
-                data: { genreId: genreId },
+                data: { dataId: dataId },
                 success: function(response) {
                     $('main').html(response);
                 },
@@ -38,40 +37,4 @@ function attachClickHandlers() {
             window.location.href = '/main';
         }
     };
-}
- function attachBookClickHandlers() {
-	$('.book-name, .bookDone-name').on('click', function() {
-		var bookId = $(this).data('book-id');
-		$.ajax({
-			url: "/bookDetailLog", 
-			type: "POST",
-			data: { bookId: bookId },
-			success: function(response) {
-				$('main').html(response);
-				history.pushState({ bookId: bookId }, '', 'bookDetailLog');
-			},
-			error: function(error) {
-				console.error("Error occurred: " + error);
-			}
-		});
-	});
-
-	window.onpopstate = function(event) {
-		if (event.state && event.state.bookId) {
-			var bookId = event.state.bookId;
-			$.ajax({
-				url: "/bookDetailLog", 
-				type: "POST",
-				data: { bookId: bookId },
-				success: function(response) {
-					$('main').html(response);
-				},
-				error: function(error) {
-					console.error("Error occurred: " + error);
-				}
-			});
-		} else {
-			window.location.href = '/main';
-		}
-	};
 }

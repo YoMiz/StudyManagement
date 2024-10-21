@@ -5,13 +5,12 @@
 	<meta charset="UTF-8">
 	<title>Detail Log</title>
 </head>
-
 <body>
 	<main>
 		<div id="listField">
-			<button class="list-button" onclick="changeList('List')">ALL</button>
-			<button class="list-button" onclick="changeList('Weekly')">Weekly</button>
-			<button class="list-button" onclick="changeList('Monthly')">Monthly</button>
+			<button class="list-button" onclick="changeDetailList('List', dataType, dataId)">ALL</button>
+			<button class="list-button" onclick="changeDetailList('Weekly', dataType, dataId)">Weekly</button>
+			<button class="list-button" onclick="changeDetailList('Monthly', dataType, dataId)">Monthly</button>
 		</div>
 		<br />
 		<br />
@@ -19,23 +18,19 @@
 		<br />
 		<p id="dataType" th:text="${detailType} + ' Log'"></p>
 		<p id="dataId" th:text="'ID: ' + ${dataId}"></p>
-
-		<tbody id="tableBodyDetail">
-		</tbody>
+		<table>
+			<tbody id="tableBodyDetail"></tbody>
+		</table>
 		<div style="text-align:center">
 			<a href="/main">戻る</a>
 		</div>
 		<canvas id="detailChart" style="max-width: 300px; max-height:200px; margin-top:50px;"></canvas>
-<table>	
-		<tbody id="detailTable">
-		</tbody>
-</table>
 	</main>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script th:src="@{/JS/detail/fetchDetailData.js}"></script>
 	<script th:src="@{/JS/detail/detail.js}"></script>
-	</script>
 </body>
+
 
 </html>

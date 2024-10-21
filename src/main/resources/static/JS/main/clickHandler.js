@@ -1,7 +1,8 @@
 function attachClickHandlers() {
-    $('.genre-name').on('click', function() {
+    $('.genre-name, .book-name, .book-done-name').on('click', function() {
         var dataType = $(this).data('type'); 
         var dataId = $(this).data('id'); 
+        console.log(dataType + dataId);
         $.ajax({
             url: "/" + dataType + "DetailLog" ,
             type: "POST",

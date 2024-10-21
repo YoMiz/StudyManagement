@@ -6,7 +6,7 @@ function fetchBookData(listName) {
 			renderBookTable(data.studyLogs);
 			var { labels, times } = getBookLabelsAndTimes(data.studyLogs);
 			renderBookChart(labels, times);
-			attachBookClickHandlers();
+			attachClickHandlers();
 		},
 		error: function(xhr, status, error) {
 			console.error("Error occurred: " + error);
@@ -25,7 +25,7 @@ function renderBookTable(studyLogs) {
         var comment = studyLog.comment || "";
         var row = '<tr>' +
             '<td hidden><input type="text" id="listField" value="' + studyLog.bookId + '" name="studyLogs[' + i + '].bookId" /></td>' +
-            '<td class="book-name" data-book-id="' + studyLog.bookId + '" style="text-decoration:underline; color:rgb(128,0,0); cursor:pointer;">' + bookName + '</td>' +
+            '<td class="book-name" data-id="' + studyLog.bookId + '"  data-type="book" style="text-decoration:underline; color:rgb(128,0,0); cursor:pointer;">' + bookName + '</td>' +
             '<td><span>' + genreName + '</span></td>' +
             '<td><span>' + author + '</span></td>' +
             '<td><span>' + sumOfTime + '</span></td>' +
@@ -39,7 +39,7 @@ function renderBookTable(studyLogs) {
             '</tr>';
         tableBody.append(row);
     });
-    attachBookClickHandlers();
+    attachClickHandlers();
 }
 
 function getBookLabelsAndTimes(studyLogs) {

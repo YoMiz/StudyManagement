@@ -21,7 +21,7 @@
 			g.genre_id = #{dataId} AND sl.user_id = #{userId}
 			AND (sl.time != 0 OR sl.comment = '登録')
 		ORDER BY
-			sl.date;
+			sl.date DESC;
 	</select>
 	<select id="getDetailLogGenreDays" resultType="com.example.app.domain.StudyLog">
 		SELECT
@@ -43,6 +43,6 @@
 			AND sl.date >= DATE_SUB(CURDATE(), INTERVAL #{days})
 			AND (sl.time != 0 OR sl.comment = '登録')
 		ORDER BY
-			sl.date;
+			sl.date DESC;
 	</select>
 </mapper>

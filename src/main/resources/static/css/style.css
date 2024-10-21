@@ -94,7 +94,7 @@ form input[type="submit"],
 
 table {
     caption-side: bottom;
-    border-collapse: collapse; /* セルの境界を正しく表示 */
+    border-collapse: collapse; 
 }
 
 .comment-box {
@@ -106,7 +106,6 @@ table {
 
 .container tr:nth-child(even) {
     background-color: rgb(244, 230, 219);
-    /* 淡色 */
 }
 
 .container td,

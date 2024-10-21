@@ -7,6 +7,7 @@
 			sl.date,
 			sl.time,
 			b.book_name,
+			b.author,
 			SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS sum_of_time,
 			sl.comment,
 			g.genre_name

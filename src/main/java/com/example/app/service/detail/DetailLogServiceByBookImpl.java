@@ -14,7 +14,7 @@ public class DetailLogServiceByBookImpl implements DetailLogService{
 	}
 
 	@Override
-	public StudyLogsList showDetailLogDays(Integer userId, Integer Id) throws Exception {
+	public StudyLogsList showDetailLogDays(Integer userId, Integer Id, Integer days) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

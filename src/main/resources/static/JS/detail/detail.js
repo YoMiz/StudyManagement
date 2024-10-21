@@ -24,6 +24,8 @@ function renderDetailTable(data, listName, dataType, dataId) {
 		var row = '<tr>' +
 		'<td>' + studyLog.bookName + '</td>' +
 		'<td>' + studyLog.author + '</td>' +
+		'<td>' + studyLog.time + '</td>' +
+		'<td>' + studyLog.sumOfTime + '</td>' +
 		'</tr>';
 		tableBody.append(row);
 	});

@@ -18,7 +18,8 @@
 		JOIN
 			genre g ON b.genre_id = g.genre_id
 		WHERE
-			g.genre_id = #{dataId} AND sl.user_id = #{userId}
+			g.genre_id = #{dataId} 
+			AND sl.user_id = #{userId}
 			AND (sl.time != 0 OR sl.comment = '登録')
 		ORDER BY
 			sl.date DESC;

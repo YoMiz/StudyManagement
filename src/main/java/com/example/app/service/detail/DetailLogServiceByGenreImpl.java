@@ -2,7 +2,6 @@ package com.example.app.service.detail;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.app.domain.StudyLog;
@@ -12,7 +11,6 @@ import com.example.app.mapper.detail.DetailLogByGenreMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Primary
 @RequiredArgsConstructor
 public class DetailLogServiceByGenreImpl implements DetailLogService{
 	private final DetailLogByGenreMapper detailLogMapper;

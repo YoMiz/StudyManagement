@@ -34,7 +34,6 @@ public class DetailLogApiController {
 		Integer userId = user.getUserId();
 		Integer days = 7;
 		StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
-		System.out.println("API CTRL: GENRE DETAIL WKLY");
 		return detailLogList;
 	}
 	
@@ -52,7 +51,24 @@ public class DetailLogApiController {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
 		StudyLogsList detailLogList = detailServiceByBook.showDetailLog(userId, dataId);
-		System.out.println("API" + detailLogList);
+		return detailLogList;
+	}
+	
+	@GetMapping("/getBookDetailDataWeekly")
+	public StudyLogsList getBookDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 7;
+		StudyLogsList detailLogList = detailServiceByBook.showDetailLogDays(userId, dataId, days);
+		return detailLogList;
+	}
+	
+	@GetMapping("/getBookDetailDataMonthly")
+	public StudyLogsList getBookDetailDataMth(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 30;
+		StudyLogsList detailLogList = detailServiceByBook.showDetailLogDays(userId, dataId, days);
 		return detailLogList;
 	}
 	

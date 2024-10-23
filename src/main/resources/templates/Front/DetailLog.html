@@ -19,15 +19,9 @@
 		<br />
 		<br />
 		<p id="dataType" th:text="${detailType} + ' Log'"></p>
-		<p id="dataId" th:text="'ID: ' + ${dataId}"></p>
+		<p hidden id="dataId" th:text="'ID: ' + ${dataId}"></p>
 		<table class="container">
-			<tr>
-				<th>Date</th>
-				<th>Book</th>
-				<th>Author</th>
-				<th>Time</th>
-				<th>SUM</th>
-			</tr>
+<!--			<tbody id="tableHeadDetail"></tbody>-->
 			<tbody id="tableBodyDetail"></tbody>
 		</table>
 		<div style="text-align:center">

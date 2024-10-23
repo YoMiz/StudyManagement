@@ -4,5 +4,5 @@ import com.example.app.domain.StudyLogsList;
 
 public interface DetailLogService {
 	StudyLogsList showDetailLog(Integer userId, Integer id) throws Exception;
-	StudyLogsList showDetailLogDays(Integer userId, Integer Id, Integer days)throws Exception;
+	StudyLogsList showDetailLogDays(Integer userId, Integer dataId, Integer days)throws Exception;
 }

@@ -27,7 +27,9 @@ public class DetailLogServiceByGenreImpl implements DetailLogService{
 
 	@Override
 	public StudyLogsList showDetailLogDays(Integer userId, Integer dataId, Integer days) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		List<StudyLog> studyListParam = detailLogMapper.getDetailLogGenreDays(userId, dataId, days);
+		StudyLogsList detailList = new StudyLogsList();
+		detailList.setStudyLogs(studyListParam);
+		return detailList;
 	}
 }

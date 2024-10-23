@@ -1,12 +1,13 @@
 package com.example.app.mapper.detail;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 
-public class DetailLogByBookMapper {
-	@GetMapping("/getBookDetailData")
-	public String getBookDetailData() throws Exception {
-		String dataTypeBook = "BOOK FROM SERVER";
-		return dataTypeBook;
-	}
+import org.apache.ibatis.annotations.Mapper;
 
+import com.example.app.domain.StudyLog;
+
+@Mapper
+public interface DetailLogByBookMapper {
+	List<StudyLog>getDetailLogBook(Integer userId, Integer dataId) throws Exception;
+	List<StudyLog>getDetailLogBookDays(Integer userId, Integer dataId, Integer days) throws Exception;
 }

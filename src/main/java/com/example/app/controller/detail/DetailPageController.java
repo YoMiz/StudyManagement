@@ -20,10 +20,10 @@ public class DetailPageController {
 
 
 	@PostMapping("/bookDetailLog")
-	public String bookDetailStudyLog(@RequestParam("bookId") Integer bookId, Model model) throws Exception {
+	public String bookDetailStudyLog(HttpSession session, @RequestParam("dataId") Integer dataId, Model model) throws Exception {
 		String detailType = "Book";
 		model.addAttribute("detailType", detailType);
-		model.addAttribute("dataId",bookId);
+		model.addAttribute("dataId",dataId);
 		return "Front/DetailLog";
 	}
 }

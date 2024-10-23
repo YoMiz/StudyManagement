@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.app.mapper.detail.DetailLogByBookMapper">
+	<select id="getDetailLogBook"
+		resultType="com.example.app.domain.StudyLog">
+		SELECT sl.date, sl.time, b.book_name, b.author,
+		SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT
+		ROW) AS sum_of_time,
+		sl.comment, g.genre_name
+		FROM study_log sl
+		JOIN book b ON sl.book_id = b.book_id
+		JOIN genre g ON b.genre_id = g.genre_id
+		WHERE b.book_id = #{dataId} AND sl.user_id = #{userId} AND (sl.time != 0 OR sl.comment =
+		'登録')
+		ORDER BY sl.date DESC;
+	</select>
+</mapper>

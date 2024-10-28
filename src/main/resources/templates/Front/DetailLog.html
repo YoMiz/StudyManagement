@@ -3,10 +3,11 @@
 
 <head>
 	<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<title>Detail Log</title>
 </head>
+
 <body>
 	<main>
 		<div id="listField">
@@ -21,7 +22,7 @@
 		<p id="dataType" th:text="${detailType} + ' Log'"></p>
 		<p hidden id="dataId" th:text="'ID: ' + ${dataId}"></p>
 		<table class="container">
-<!--			<tbody id="tableHeadDetail"></tbody>-->
+			<thead id="tableHeadDetail"></thead>
 			<tbody id="tableBodyDetail"></tbody>
 		</table>
 		<div style="text-align:center">

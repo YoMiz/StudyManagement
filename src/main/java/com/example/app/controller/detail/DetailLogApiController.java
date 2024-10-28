@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
+import com.example.app.service.detail.DetailLogServiceByBookImpl;
 import com.example.app.service.detail.DetailLogServiceByGenreImpl;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,7 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class DetailLogApiController {
 	@Autowired
 	private final DetailLogServiceByGenreImpl detailServiceByGenre;
-
+	private final DetailLogServiceByBookImpl detailServiceByBook;
+	
 	@GetMapping("/getGenreDetailDataList")
 	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
 		User user = (User) session.getAttribute("user");
@@ -26,15 +28,16 @@ public class DetailLogApiController {
 		return detailLogList;
 	}
 
-	@GetMapping("/getBookDetailDataWeek")
-	public StudyLogsList getGenreDetailDataWK(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+	@GetMapping("/getGenreDetailDataWeekly")
+	public StudyLogsList getGenreDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
 		Integer days = 7;
 		StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
 		return detailLogList;
 	}
-	@GetMapping("/getBookDetailDataMonth")
+	
+	@GetMapping("/getGenreDetailDataMonthly")
 	public StudyLogsList getGenreDetailDataMth(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getUserId();
@@ -42,4 +45,31 @@ public class DetailLogApiController {
 		StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
 		return detailLogList;
 	}
+	
+	@GetMapping("/getBookDetailDataList")
+	public StudyLogsList getAllBookDetailList(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		StudyLogsList detailLogList = detailServiceByBook.showDetailLog(userId, dataId);
+		return detailLogList;
+	}
+	
+	@GetMapping("/getBookDetailDataWeekly")
+	public StudyLogsList getBookDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 7;
+		StudyLogsList detailLogList = detailServiceByBook.showDetailLogDays(userId, dataId, days);
+		return detailLogList;
+	}
+	
+	@GetMapping("/getBookDetailDataMonthly")
+	public StudyLogsList getBookDetailDataMth(HttpSession session, @RequestParam("dataId") Integer dataId) throws Exception {
+		User user = (User) session.getAttribute("user");
+		Integer userId = user.getUserId();
+		Integer days = 30;
+		StudyLogsList detailLogList = detailServiceByBook.showDetailLogDays(userId, dataId, days);
+		return detailLogList;
+	}
+	
 }

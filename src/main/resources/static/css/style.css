@@ -1,6 +1,5 @@
 /* サイドバーメニュー */
-.side-container,
-.login-container {
+.side-container, .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,10 +20,7 @@ form {
     align-items: center;
 }
 
-form label,
-form input[type="submit"],
-#openSidebar,
-#update {
+form label, form input[type="submit"], #openSidebar, #update {
     background-color: rgb(128, 0, 0);
     color: white;
     border-radius: 12px;
@@ -38,8 +34,7 @@ form label {
     margin-bottom: 3px;
 }
 
-form input[type="submit"],
-#update {
+form input[type="submit"], #update {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.5s linear;
@@ -66,8 +61,7 @@ form input[type="submit"],
     border-radius: 30%;
 }
 
-#openSidebar:hover,
-#listField:hover {
+#openSidebar:hover, #listField:hover {
     background-color: darkred;
     color: white;
     border-radius: 15%;
@@ -79,6 +73,7 @@ form input[type="submit"],
     width: 100%;
     margin-top: 50px;
 }
+
 #listField {
     position: fixed;
     top: 30px;
@@ -94,7 +89,7 @@ form input[type="submit"],
 
 table {
     caption-side: bottom;
-    border-collapse: collapse; /* セルの境界を正しく表示 */
+    border-collapse: collapse;
 }
 
 .comment-box {
@@ -106,11 +101,9 @@ table {
 
 .container tr:nth-child(even) {
     background-color: rgb(244, 230, 219);
-    /* 淡色 */
 }
 
-.container td,
-.container th {
+.container td, .container th {
     text-align: center;
 }
 
@@ -118,9 +111,9 @@ table {
     background-color: rgb(244, 230, 219);
 }
 
-.container td:nth-child(5) {
-    text-align: right;
-}
+/*.container td:nth-child(5) {*/
+/*    text-align: right;*/
+/*}*/
 
 .time-box {
     width: 50px;

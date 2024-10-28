@@ -6,7 +6,7 @@ function fetchBookDoneData(listName) {
 			renderBookDoneTable(data.studyLogs);
 			var { labels, times } = getBookDoneLabelsAndTimes(data.studyLogs);
 			renderBookDoneChart(labels, times);
-			attachBookClickHandlers(); // 共通のクリックハンドラーを呼び出し
+			attachClickHandlers(); // 共通のクリックハンドラーを呼び出し
 		},
 		error: function(xhr, status, error) {
 			console.error("Error occurred: " + error);
@@ -26,7 +26,7 @@ function renderBookDoneTable(studyLogs) {
 		var comment = studyLog.comment || " ";
 		var row = '<tr>' +
 			'<td hidden><input type="text" id="listField" value="' + studyLog.bookId + '" name="studyLogs[' + i + '].bookId" /></td>' +
-			'<td class="bookDone-name" data-book-id="' + studyLog.bookId + '" style="text-decoration:underline; color:rgb(128,0,0); cursor:pointer;">' + bookName + '</td>' +
+			'<td class="book-name" data-id="' + studyLog.bookId + '" data-type="book"  style="text-decoration:underline; color:rgb(128,0,0); cursor:pointer;">' + bookName + '</td>' +
 			'<td>' + genreName + '</td>' +
 			'<td>' + author + '</td>' +
 			'<td>' + sumOfTime + '</td>' +
@@ -37,13 +37,13 @@ function renderBookDoneTable(studyLogs) {
 			'</tr>';
 		tableBody.append(row);
 	});
-	attachBookClickHandlers(); // 共通のクリックハンドラーを呼び出し
+	attachClickHandlers();
 }
 
-function getBookDoneLabelsAndTimes(studyLogs){
+function getBookDoneLabelsAndTimes(studyLogs) {
 	var labels = [];
 	var times = [];
-	studyLogs.forEach(function(studyLog){
+	studyLogs.forEach(function(studyLog) {
 		labels.push(studyLog.bookName);
 		times.push(parseFloat(studyLog.sumOfTime).toFixed(1));
 	});

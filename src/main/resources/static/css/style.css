@@ -111,10 +111,6 @@ table {
     background-color: rgb(244, 230, 219);
 }
 
-/*.container td:nth-child(5) {*/
-/*    text-align: right;*/
-/*}*/
-
 .time-box {
     width: 50px;
     text-align: right;

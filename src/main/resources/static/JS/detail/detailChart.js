@@ -1,5 +1,37 @@
 var detailChartInstance;
+
+function getLabelsAndTimes(data, listName) {
+    var labels = [];
+    var times = [];
+    var cumulativeTimes = [];
+    var cumulativeSum = 0;
+    var totalSum = 0;
+
+    data.studyLogs.forEach(function(studyLog) {
+        labels.push(new Date(studyLog.date).toLocaleDateString('ja-JP', { year: '2-digit', month: '2-digit', day: '2-digit' }));
+        times.push(studyLog.time);
+        cumulativeSum += studyLog.time;
+        cumulativeTimes.push(cumulativeSum);
+        totalSum += studyLog.time;
+    });
+
+    var averageTime = totalSum / times.length;
+    var averageTimes = Array(times.length).fill(averageTime);
+
+    console.log("Labels: ", labels);
+    console.log("Times: ", times);
+    console.log("Cumulative Times: ", cumulativeTimes);
+    console.log("Average Times: ", averageTimes);
+
+    return { labels, times, cumulativeTimes, averageTimes };
+}
+
 function renderDetailChart(labels, times, cumulativeTimes, averageTimes) {
+    console.log("Rendering chart with labels: ", labels);
+    console.log("Rendering chart with times: ", times);
+    console.log("Rendering chart with cumulative times: ", cumulativeTimes);
+    console.log("Rendering chart with average times: ", averageTimes);
+
     var chartElement = document.getElementById('detailChart');
     chartElement.style.maxWidth = '750px';
     chartElement.style.maxHeight = '400px';
@@ -90,30 +122,4 @@ function renderDetailChart(labels, times, cumulativeTimes, averageTimes) {
             }
         }
     });
-}
-
-function getLabelsAndTimes(data, listName) {
-    var labels = [];
-    var times = [];
-    var cumulativeTimes = [];
-    var cumulativeSum = 0;
-    var totalSum = 0;
-
-    data.studyLogs.forEach(function(studyLog) {
-        labels.push(new Date(studyLog.date).toLocaleDateString('ja-JP', { year: '2-digit', month: '2-digit', day: '2-digit' }));
-        times.push(studyLog.time);
-        cumulativeSum += studyLog.time;
-        cumulativeTimes.push(cumulativeSum);
-        totalSum += studyLog.time;
-    });
-
-    var averageTime = totalSum / times.length;
-    var averageTimes = Array(times.length).fill(averageTime);
-
-    console.log("Labels: ", labels);
-    console.log("Times: ", times);
-    console.log("Cumulative Times: ", cumulativeTimes);
-    console.log("Average Times: ", averageTimes);
-
-    return { labels, times, cumulativeTimes, averageTimes };
 }

@@ -12,11 +12,12 @@ function fetchDetailData(listName, dataType, dataId) {
                 renderDetailTableBookHeader();
                 renderDetailTableBook(data);
             }
-            var { labels, times } = getLabelsAndTimes(data, listName);
-            renderDetailChart(labels, times);
+            var { labels, times, cumulativeTimes, averageTimes } = getLabelsAndTimes(data, listName);
+            renderDetailChart(labels, times, cumulativeTimes, averageTimes);
         }
     });
 }
+
 
 function renderDetailTableGenreHeader() {
     var tableHead = $('#tableHeadDetail');
@@ -67,7 +68,6 @@ function renderDetailTableBook(data) {
     });
 }
 
-// DOMContentLoadedイベントリスナーを追加
 document.addEventListener("DOMContentLoaded", function() {
     var dataType = document.getElementById("dataType").textContent.replace(" Log", "");
     var tableHeadDetail = document.getElementById("tableHeadDetail");

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class StudyLog {
     public Integer userId;
     public Double time;
+    public Integer logId;
     public Integer bookId;
     public Integer genreId;
     public String bookName;

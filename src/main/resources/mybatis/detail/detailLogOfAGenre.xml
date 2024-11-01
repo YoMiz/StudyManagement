@@ -4,6 +4,7 @@
 <mapper namespace="com.example.app.mapper.detail.DetailLogByGenreMapper">
 	<select id="getDetailLogGenre" resultType="com.example.app.domain.StudyLog">
 		SELECT
+			sl.log_id,
 			sl.date,
 			sl.time,
 			b.book_name,
@@ -26,6 +27,7 @@
 	</select>
 	<select id="getDetailLogGenreDays" resultType="com.example.app.domain.StudyLog">
 		SELECT
+			sl.log_id,
 			sl.date,
 			sl.time,
 			b.book_name,

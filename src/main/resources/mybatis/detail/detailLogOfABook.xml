@@ -4,6 +4,7 @@
 <mapper namespace="com.example.app.mapper.detail.DetailLogByBookMapper">
 	<select id="getDetailLogBook" resultType="com.example.app.domain.StudyLog">
 		SELECT 
+		sl.log_id,
 		sl.date,
 		sl.time, 
 		b.book_name, 
@@ -26,6 +27,7 @@
 	</select>
 	<select id="getDetailLogBookDays" resultType="com.example.app.domain.StudyLog">
 		SELECT
+			sl.log_id,
 			sl.date,
 			sl.time,
 			b.book_id,

@@ -18,19 +18,10 @@ function getLabelsAndTimes(data, listName) {
     var averageTime = totalSum / times.length;
     var averageTimes = Array(times.length).fill(averageTime);
 
-    console.log("Labels: ", labels);
-    console.log("Times: ", times);
-    console.log("Cumulative Times: ", cumulativeTimes);
-    console.log("Average Times: ", averageTimes);
-
     return { labels, times, cumulativeTimes, averageTimes };
 }
 
 function renderDetailChart(labels, times, cumulativeTimes, averageTimes) {
-    console.log("Rendering chart with labels: ", labels);
-    console.log("Rendering chart with times: ", times);
-    console.log("Rendering chart with cumulative times: ", cumulativeTimes);
-    console.log("Rendering chart with average times: ", averageTimes);
 
     var chartElement = document.getElementById('detailChart');
     chartElement.style.maxWidth = '750px';
@@ -66,7 +57,7 @@ function renderDetailChart(labels, times, cumulativeTimes, averageTimes) {
                     tension: 0.4 // 線の滑らかさ
                 },
                 {
-                    label: 'Cumulative Times',
+                    label: 'SUM',
                     data: cumulativeTimes,
                     backgroundColor: 'rgba(140, 190, 140, 0.2)',
                     borderColor: 'rgba(120, 150, 120, 1)',

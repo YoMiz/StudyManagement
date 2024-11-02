@@ -19,12 +19,14 @@
 		<br />
 		<br />
 		<br />
-		<button id="updateButton">更新</button>
 
 		<canvas id="detailChart" style="max-width: 300px; max-height:200px; margin-top:50px;"></canvas>
 		<p id="dataType" th:text="${detailType} + ' Log'"></p>
 		<p hidden id="dataId" th:text="'ID: ' + ${dataId}"></p>
 		<table class="container">
+			<div style="display: flex; justify-content: center; align-items: center; height: 10vh; margin: 0;">
+				<button id="updateButton" style="padding: 5px 10px;font-size: 16px;">更新</button>
+			</div>
 			<thead id="tableHeadDetail"></thead>
 			<tbody id="tableBodyDetail"></tbody>
 		</table>
@@ -39,4 +41,5 @@
 	<script th:src="@{/JS/detail/tableRendering.js}"></script>
 	<script th:src="@{/JS/detail/detailUpdateCheck.js}"></script>
 </body>
+
 </html>

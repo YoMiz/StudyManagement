@@ -7,6 +7,11 @@ function getLabelsAndTimes(data, listName) {
     var cumulativeSum = 0;
     var totalSum = 0;
 
+    // 日付で昇順にソート
+    data.studyLogs.sort(function(a, b) {
+        return new Date(a.date) - new Date(b.date);
+    });
+
     data.studyLogs.forEach(function(studyLog) {
         labels.push(new Date(studyLog.date).toLocaleDateString('ja-JP', { year: '2-digit', month: '2-digit', day: '2-digit' }));
         times.push(studyLog.time);

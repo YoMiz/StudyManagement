@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.app.domain.StudyLog;
 import com.example.app.domain.StudyLogsList;
 import com.example.app.domain.User;
+import com.example.app.mapper.detail.DetailUpdateMapper;
 import com.example.app.service.detail.DetailLogServiceByBookImpl;
 import com.example.app.service.detail.DetailLogServiceByGenreImpl;
 
@@ -24,6 +25,7 @@ public class DetailLogApiController {
 	@Autowired
 	private final DetailLogServiceByGenreImpl detailServiceByGenre;
 	private final DetailLogServiceByBookImpl detailServiceByBook;
+	private final DetailUpdateMapper detailUpdateMapper;
 
 	@GetMapping("/getGenreDetailDataList")
 	public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer dataId)
@@ -84,10 +86,14 @@ public class DetailLogApiController {
 	}
 
 	@PostMapping("/updateLogs")
-	public String updateLogs(@RequestBody List<StudyLog> updatedLogs) throws Exception {
-		System.out.println("Received logs: " + updatedLogs);
-		for (StudyLog log : updatedLogs) {
-			System.out.println("Updating log: " + log);
+	public String updateLogs(HttpSession session, @RequestBody List<StudyLog> updatedLogs) throws Exception {
+		User user = (User)session.getAttribute("user");
+		Integer userId = user.getUserId();
+		for (StudyLog studyLog : updatedLogs) {
+			Integer logId = studyLog.getLogId();
+			Double time = studyLog.getTime();
+			String comment = studyLog.getComment();
+			detailUpdateMapper.updateStudyLog(userId, logId, time, comment);
 		}
 		return "Logs updated successfully";
 	}

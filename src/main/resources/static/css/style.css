@@ -20,7 +20,7 @@ form {
     align-items: center;
 }
 
-form label, form input[type="submit"], #openSidebar, #update {
+form label, form input[type="submit"], #openSidebar, #update, #updateButton {
     background-color: rgb(128, 0, 0);
     color: white;
     border-radius: 12px;

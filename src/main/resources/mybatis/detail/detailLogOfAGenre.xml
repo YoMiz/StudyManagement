@@ -1,52 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.app.mapper.detail.DetailLogByGenreMapper">
-	<select id="getDetailLogGenre" resultType="com.example.app.domain.StudyLog">
+<mapper
+	namespace="com.example.app.mapper.detail.DetailLogByGenreMapper">
+	<select id="getDetailLogGenre"
+		resultType="com.example.app.domain.StudyLog">
 		SELECT
-			sl.log_id,
-			sl.date,
-			sl.time,
-			b.book_name,
-			b.author,
-			SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS sum_of_time,
-			sl.comment,
-			g.genre_name
+		sl.log_id,
+		sl.date,
+		sl.time,
+		b.book_name,
+		b.author,
+		SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT
+		ROW) AS sum_of_time,
+		sl.comment,
+		g.genre_name
 		FROM
-			study_log sl
+		study_log sl
 		JOIN
-			book b ON sl.book_id = b.book_id
+		book b ON sl.book_id = b.book_id
 		JOIN
-			genre g ON b.genre_id = g.genre_id
+		genre g ON b.genre_id = g.genre_id
 		WHERE
-			g.genre_id = #{dataId} 
-			AND sl.user_id = #{userId}
-			AND (sl.time != 0 OR sl.comment = '登録')
+		g.genre_id = #{dataId}
+		AND sl.user_id = #{userId}
+		AND (sl.time != 0 OR sl.comment = '登録')
 		ORDER BY
-			sl.date DESC;
+		sl.date DESC;
 	</select>
-	<select id="getDetailLogGenreDays" resultType="com.example.app.domain.StudyLog">
+	<select id="getDetailLogGenreDays"
+		resultType="com.example.app.domain.StudyLog">
 		SELECT
-			sl.log_id,
-			sl.date,
-			sl.time,
-			b.book_name,
-			b.author,
-			SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS sum_of_time,
-			sl.comment,
-			g.genre_name
+		sl.log_id,
+		sl.date,
+		sl.time,
+		b.book_name,
+		b.author,
+		SUM(sl.time) OVER (ORDER BY sl.date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT
+		ROW) AS sum_of_time,
+		sl.comment,
+		g.genre_name
 		FROM
-			study_log sl
+		study_log sl
 		JOIN
-			book b ON sl.book_id = b.book_id
+		book b ON sl.book_id = b.book_id
 		JOIN
-			genre g ON b.genre_id = g.genre_id
+		genre g ON b.genre_id = g.genre_id
 		WHERE
-			g.genre_id = #{dataId}
-			AND sl.user_id = #{userId}
-			AND sl.date >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY)
-			AND (sl.time != 0 OR sl.comment = '登録')
+		g.genre_id = #{dataId}
+		AND sl.user_id = #{userId}
+		AND sl.date >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY)
+		AND (sl.time != 0 OR sl.comment = '登録')
 		ORDER BY
-			sl.date DESC;
+		sl.date DESC;
 	</select>
+	<select id="getAggregatedLogGenre"
+		resultType="com.example.app.domain.StudyLog">
+		SELECT
+		DATE(sl.date) AS date,
+		SUM(sl.time) AS total_time,
+		g.genre_name
+		FROM
+		study_log sl
+		JOIN
+		book b ON sl.book_id = b.book_id
+		JOIN
+		genre g ON b.genre_id = g.genre_id
+		WHERE
+		g.genre_id = #{dataId}
+		AND sl.user_id = #{userId}
+		AND (sl.time != 0 OR sl.comment = '登録')
+		GROUP BY
+		DATE(sl.date), g.genre_name
+		ORDER BY
+		DATE(sl.date) DESC;
+	</select>
+	<select id="getAggregatedLogGenreDays"
+		resultType="com.example.app.domain.StudyLog">
+		SELECT
+		DATE(sl.date) AS date,
+		SUM(sl.time) AS total_time,
+		g.genre_name
+		FROM
+		study_log sl
+		JOIN
+		book b ON sl.book_id = b.book_id
+		JOIN
+		genre g ON b.genre_id = g.genre_id
+		WHERE
+		g.genre_id = #{dataId}
+		AND sl.user_id = #{userId}
+		AND sl.date >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY)
+		AND (sl.time != 0 OR sl.comment = '登録')
+		GROUP BY
+		DATE(sl.date), g.genre_name
+		ORDER BY
+		DATE(sl.date) DESC;
+	</select>
+
 </mapper>

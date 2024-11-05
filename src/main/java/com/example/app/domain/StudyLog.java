@@ -24,4 +24,5 @@ public class StudyLog {
     public Date lastDate;
     public Integer updateCheck;
     public String comment;
+    public Double totalTime;
 }

@@ -23,6 +23,24 @@ function fetchDetailData(listName, dataType, dataId) {
                 renderDetailTableBookHeader();
                 renderDetailTableBook(data);
             }
+            fetchChartData(listName, dataType, dataId);
+        }
+    });
+}
+
+function fetchChartData(listName, dataType, dataId) {
+    let url;
+    if (dataType === 'Genre') {
+        url = "/getAggregatedGenreDetailData" + listName;
+    } else {
+        url = "/getAggregatedBookDetailData" + listName;
+    }
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: { dataType: dataType, dataId: dataId },
+        success: function(data) {
             var { labels, times, cumulativeTimes, averageTimes } = getLabelsAndTimes(data, listName);
             renderDetailChart(labels, times, cumulativeTimes, averageTimes);
         }

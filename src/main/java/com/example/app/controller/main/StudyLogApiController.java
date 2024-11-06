@@ -3,7 +3,6 @@ package com.example.app.controller.main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.app.domain.StudyLogsList;
@@ -22,6 +21,16 @@ public class StudyLogApiController {
 	private final StudyLogServiceByGenreImpl studyLogByGenre;
 	private final StudyLogServiceByBookImpl studyLogByBook;
 	
+	
+//	@PostMapping("/getAllStudyLogOfAGenre")
+//	public String getGenreLog(HttpSession session, Model model, Integer genreId) throws Exception{
+//		User user = (User)session.getAttribute("user");
+//		Integer userId = user.getUserId();
+//		StudyLogsList studyLogOfAGenre = studyLogByGenre.showAllStudyLogOfAGenre(userId, genreId);
+//		model.addAttribute(studyLogOfAGenre);
+//		return "Front/GenreLog";
+//	}
+
 	@GetMapping("/getStudyLogByGenreList")
 	public StudyLogsList getAllStudyLogByGenre(HttpSession session, Model model) throws Exception {
 	    User user = (User) session.getAttribute("user");
@@ -100,12 +109,4 @@ public class StudyLogApiController {
 		return studyLogByBookDoneList;
 	}
 	
-	@PostMapping("/getAllStudyLogOfAGenre")
-	public String getGenreLog(HttpSession session, Model model, Integer genreId) throws Exception{
-		User user = (User)session.getAttribute("user");
-		Integer userId = user.getUserId();
-		StudyLogsList studyLogOfAGenre = studyLogByGenre.showAllStudyLogOfAGenre(userId, genreId);
-		model.addAttribute(studyLogOfAGenre);
-		return "Front/GenreLog";
-	}
 }

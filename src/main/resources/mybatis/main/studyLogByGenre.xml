@@ -6,17 +6,68 @@
 	<select id="getStudyLogByGenre"
 		resultType="com.example.app.domain.StudyLog">
 		WITH latest_comments AS (
+		SELECT b.genre_id, b.book_id,
+		MAX(s.date) as max_date
+		FROM study_log s
+		JOIN book b ON s.book_id =
+		b.book_id
+		WHERE s.user_id = #{userId}
+		GROUP BY b.genre_id, b.book_id
+		),
+		time_sum AS (
+		SELECT b.genre_id, CAST(SUM(s.time) AS DECIMAL(65, 1)) as
+		sum_of_time
+		FROM study_log s
+		JOIN book b ON s.book_id = b.book_id
+		WHERE
+		s.user_id = #{userId}
+		GROUP BY b.genre_id
+		),
+		latest_books AS (
+		SELECT
+		lc.genre_id, lc.book_id, lc.max_date, sl.comment
+		FROM latest_comments
+		lc
+		JOIN study_log sl ON lc.book_id = sl.book_id AND lc.max_date =
+		sl.date
+		),
+		genre_latest_books AS (
+		SELECT lb.genre_id, MAX(lb.max_date)
+		as genre_max_date
+		FROM latest_books lb
+		GROUP BY lb.genre_id
+		)
+		SELECT
+		g.genre_name, g.genre_id, ts.sum_of_time,
+		lb.comment,
+		glb.genre_max_date as last_date
+		FROM genre g
+		JOIN time_sum ts ON
+		g.genre_id = ts.genre_id
+		JOIN genre_latest_books glb ON g.genre_id =
+		glb.genre_id
+		JOIN latest_books lb ON glb.genre_id = lb.genre_id AND
+		glb.genre_max_date
+		= lb.max_date
+		ORDER BY last_date DESC;
+
+	</select>
+	<select id="getStudyLogByGenreDays"
+		resultType="com.example.app.domain.StudyLog">
+		WITH latest_comments AS (
 		SELECT b.genre_id, b.book_id, MAX(s.date) as max_date
 		FROM study_log s
 		JOIN book b ON s.book_id = b.book_id
-		WHERE s.user_id = #{userId}
+		WHERE s.user_id = #{userId} AND s.date >= DATE_SUB(CURDATE(), INTERVAL
+		#{days} DAY)
 		GROUP BY b.genre_id, b.book_id
 		),
 		time_sum AS (
 		SELECT b.genre_id, CAST(SUM(s.time) AS DECIMAL(65, 1)) as sum_of_time
 		FROM study_log s
 		JOIN book b ON s.book_id = b.book_id
-		WHERE s.user_id = #{userId}
+		WHERE s.user_id = #{userId} AND s.date >= DATE_SUB(CURDATE(), INTERVAL
+		#{days} DAY)
 		GROUP BY b.genre_id
 		),
 		latest_books AS (
@@ -39,54 +90,17 @@
 		ORDER BY last_date DESC;
 
 	</select>
-	<select id="getStudyLogByGenreDays"
-		resultType="com.example.app.domain.StudyLog">
-		WITH latest_comments AS (
-		SELECT book_id, MAX(date) as
-		last_date
-		FROM study_log
-		WHERE user_id = #{userId} AND date >=
-		DATE_SUB(CURDATE(), INTERVAL #{days}
-		DAY)
-		GROUP BY book_id
-		),
-		time_sum AS
-		(
-		SELECT book_id, CAST(SUM(time) AS DECIMAL(65, 1)) as sum_of_time
-		FROM
-		study_log
-		WHERE user_id = #{userId} AND date >= DATE_SUB(CURDATE(),
-		INTERVAL #{days}
-		DAY)
-		GROUP BY book_id
-		)
-		SELECT g.genre_id, g.genre_name,
-		SUM(ts.sum_of_time) as sum_of_time,
-		MAX(lc.last_date) as last_date,
-		GROUP_CONCAT((SELECT comment FROM study_log WHERE book_id = b.book_id
-		AND date =
-		lc.last_date) ORDER BY lc.last_date DESC SEPARATOR '; ') as
-		comment
-		FROM genre g
-		JOIN book b ON g.genre_id = b.genre_id
-		JOIN time_sum
-		ts ON b.book_id = ts.book_id
-		JOIN latest_comments lc ON b.book_id =
-		lc.book_id
-		GROUP BY g.genre_id
-		ORDER BY last_date DESC;
-	</select>
-	<select id="getAllStudyLogOfAGenre">
-		SELECT b.book_name, g.genre_name, b.author,
-		CAST(s.time AS DECIMAL(65, 1)) as time, s.date
-		FROM study_log s
-		JOIN
-		book b ON s.book_id = b.book_id
-		JOIN genre g ON b.genre_id = g.genre_id
-		WHERE s.user_id = #{userId} AND b.genre_id = #{genreId}
-		GROUP BY
-		b.book_name, g.genre_name, b.author, s.date, s.time
-		ORDER BY s.date;
-	</select>
+	<!-- <select id="getAllStudyLogOfAGenre"> -->
+	<!-- SELECT b.book_name, g.genre_name, b.author, -->
+	<!-- CAST(s.time AS DECIMAL(65, 1)) as time, s.date -->
+	<!-- FROM study_log s -->
+	<!-- JOIN -->
+	<!-- book b ON s.book_id = b.book_id -->
+	<!-- JOIN genre g ON b.genre_id = g.genre_id -->
+	<!-- WHERE s.user_id = #{userId} AND b.genre_id = #{genreId} -->
+	<!-- GROUP BY -->
+	<!-- b.book_name, g.genre_name, b.author, s.date, s.time -->
+	<!-- ORDER BY s.date; -->
+	<!-- </select> -->
 
 </mapper>

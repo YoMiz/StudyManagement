@@ -28,12 +28,12 @@ public class StudyLogServiceByGenreImpl implements StudyLogService {
 		studyList.setStudyLogs(studyListParam);
 		return studyList;
 	}
-	public StudyLogsList showAllStudyLogOfAGenre(Integer userId, Integer genreId)throws Exception{
-		List<StudyLog> studyListParam = studyLogMapper.getAllStudyLogOfAGenre(userId, genreId);
-		StudyLogsList studyList = new StudyLogsList();
-		studyList.setStudyLogs(studyListParam);
-		return studyList;
-	}
+//	public StudyLogsList showAllStudyLogOfAGenre(Integer userId, Integer genreId)throws Exception{
+//		List<StudyLog> studyListParam = studyLogMapper.getAllStudyLogOfAGenre(userId, genreId);
+//		StudyLogsList studyList = new StudyLogsList();
+//		studyList.setStudyLogs(studyListParam);
+//		return studyList;
+//	}
 
 
 }

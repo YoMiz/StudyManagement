@@ -16,24 +16,8 @@ public class DetailLogServiceByGenreImpl implements DetailLogService {
     private final DetailLogByGenreMapper detailLogMapper;
 
     @Override
-    public StudyLogsList showDetailLog(Integer userId, Integer dataId) throws Exception {
-        List<StudyLog> studyListParam = detailLogMapper.getDetailLogGenre(userId, dataId);
-        StudyLogsList detailList = new StudyLogsList();
-        detailList.setStudyLogs(studyListParam);
-        return detailList;
-    }
-
-    @Override
     public StudyLogsList showDetailLogDays(Integer userId, Integer dataId, Integer days) throws Exception {
         List<StudyLog> studyListParam = detailLogMapper.getDetailLogGenreDays(userId, dataId, days);
-        StudyLogsList detailList = new StudyLogsList();
-        detailList.setStudyLogs(studyListParam);
-        return detailList;
-    }
-
-    @Override
-    public StudyLogsList showAggregatedLog(Integer userId, Integer dataId) throws Exception {
-        List<StudyLog> studyListParam = detailLogMapper.getAggregatedLogGenre(userId, dataId);
         StudyLogsList detailList = new StudyLogsList();
         detailList.setStudyLogs(studyListParam);
         return detailList;

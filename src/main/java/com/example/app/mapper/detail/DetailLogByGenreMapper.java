@@ -8,6 +8,8 @@ import com.example.app.domain.StudyLog;
 
 @Mapper
 public interface DetailLogByGenreMapper {
-    List<StudyLog> getDetailLogGenreDays(Integer userId, Integer dataId, Integer days) throws Exception;
-    List<StudyLog> getAggregatedLogGenreDays(Integer userId, Integer dataId, Integer days) throws Exception;
+	List<StudyLog> getDetailLogGenre(Integer userId, Integer dataId) throws Exception;
+	List<StudyLog> getDetailLogGenreDays(Integer userId, Integer dataId, Integer days) throws Exception;
+	List<StudyLog> getAggregatedLogGenre(Integer userId, Integer dataId) throws Exception;
+	List<StudyLog> getAggregatedLogGenreDays(Integer userId, Integer dataId, Integer days) throws Exception;
 }

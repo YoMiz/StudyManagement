@@ -27,6 +27,22 @@ public class DetailLogApiController {
     private final DetailLogServiceByBookImpl detailServiceByBook;
     private final DetailUpdateMapper detailUpdateMapper;
 
+    @GetMapping("/getGenreDetailDataList")
+    public StudyLogsList getAllGenreDetailList(HttpSession session, @RequestParam("dataId") Integer dataId)
+            throws Exception {
+        User user = (User) session.getAttribute("user");
+        Integer userId = user.getUserId();
+        StudyLogsList detailLogList = detailServiceByGenre.showDetailLog(userId, dataId);
+        return detailLogList;
+    }
+    @GetMapping("/getBookDetailDataList")
+    public StudyLogsList getAllBookDetailList(HttpSession session, @RequestParam("dataId") Integer dataId)
+            throws Exception {
+        User user = (User) session.getAttribute("user");
+        Integer userId = user.getUserId();
+        StudyLogsList detailLogList = detailServiceByBook.showDetailLog(userId, dataId);
+        return detailLogList;
+    }
     @GetMapping("/getGenreDetailDataWeekly")
     public StudyLogsList getGenreDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId)
             throws Exception {
@@ -36,7 +52,6 @@ public class DetailLogApiController {
         StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
         return detailLogList;
     }
-
     @GetMapping("/getGenreDetailDataMonthly")
     public StudyLogsList getGenreDetailDataMth(HttpSession session, @RequestParam("dataId") Integer dataId)
             throws Exception {
@@ -45,6 +60,14 @@ public class DetailLogApiController {
         Integer days = 30;
         StudyLogsList detailLogList = detailServiceByGenre.showDetailLogDays(userId, dataId, days);
         return detailLogList;
+    }
+    @GetMapping("/getAggregatedBookDetailDataList")
+    public StudyLogsList getAggregatedBookDetailList(HttpSession session, @RequestParam("dataId") Integer dataId)
+    		throws Exception {
+    	User user = (User) session.getAttribute("user");
+    	Integer userId = user.getUserId();
+    	StudyLogsList detailLogList = detailServiceByBook.showAggregatedLog(userId, dataId);
+    	return detailLogList;
     }
 
     @GetMapping("/getBookDetailDataWeekly")
@@ -67,7 +90,6 @@ public class DetailLogApiController {
         return detailLogList;
     }
 
-
     @GetMapping("/getAggregatedBookDetailDataWeekly")
     public StudyLogsList getAggregatedBookDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId)
             throws Exception {
@@ -88,7 +110,14 @@ public class DetailLogApiController {
         return detailLogList;
     }
 
-
+    @GetMapping("/getAggregatedGenreDetailDataList")
+    public StudyLogsList getAggregatedGenreDetailList(HttpSession session, @RequestParam("dataId") Integer dataId)
+            throws Exception {
+        User user = (User) session.getAttribute("user");
+        Integer userId = user.getUserId();
+        StudyLogsList detailLogList = detailServiceByGenre.showAggregatedLog(userId, dataId);
+        return detailLogList;
+    }
     @GetMapping("/getAggregatedGenreDetailDataWeekly")
     public StudyLogsList getAggregatedGenreDetailDataWk(HttpSession session, @RequestParam("dataId") Integer dataId)
             throws Exception {

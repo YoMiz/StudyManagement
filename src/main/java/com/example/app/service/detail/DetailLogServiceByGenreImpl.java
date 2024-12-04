@@ -31,10 +31,11 @@ public class DetailLogServiceByGenreImpl implements DetailLogService {
     }
     @Override
     public StudyLogsList showAggregatedLog(Integer userId, Integer dataId) throws Exception {
-        List<StudyLog> studyListParam = detailLogMapper.getAggregatedLogGenre(userId, dataId);
-        StudyLogsList detailList = new StudyLogsList();
-        detailList.setStudyLogs(studyListParam);
-        return detailList;
+    	Integer days = 365;
+        List<StudyLog> studyListParam = detailLogMapper.getAggregatedLogGenreDays(userId, dataId, days);
+        StudyLogsList detailListForChart = new StudyLogsList();
+        detailListForChart.setStudyLogs(DateUtils.fillMissingDates(studyListParam, days));
+        return detailListForChart;
     }
 
     @Override

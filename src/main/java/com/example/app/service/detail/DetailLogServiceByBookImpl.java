@@ -42,9 +42,10 @@ public class DetailLogServiceByBookImpl implements DetailLogService {
     
     @Override
     public StudyLogsList showAggregatedLog(Integer userId, Integer dataId) throws Exception {
-        List<StudyLog> studyListParam = detailLogMapper.getAggregatedLogBook(userId, dataId);
+    	Integer days = 365;
+        List<StudyLog> studyListParam = detailLogMapper.getAggregatedLogBookDays(userId, dataId,days);
         StudyLogsList detailListForChart = new StudyLogsList();
-        detailListForChart.setStudyLogs(DateUtils.fillMissingDates(studyListParam,365));
+        detailListForChart.setStudyLogs(DateUtils.fillMissingDates(studyListParam, days));
         return detailListForChart;
     }
 
